@@ -79,7 +79,10 @@ public class background : MonoBehaviour {
   }
 
   void MoveItems() {
-    // Move items in sync with background scrolling.
+    GameObject[] ItemGOs = GameObject.FindGameObjectsWithTag("Item");
+    for (int i = 0; i < ItemGOs.Length; i++) {
+      ItemGOs[i].transform.position -= PlayerDelta;
+    }
   }
 }
 
