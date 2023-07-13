@@ -5,6 +5,9 @@ using UnityEngine;
 public class item_behav : MonoBehaviour {
   public class range {
     public float min, max;
+    public range() {
+      min = max = 0.0f;
+    }
     public range(float arg1, float arg2) {
       min = arg1;
       max = arg2;
@@ -14,8 +17,8 @@ public class item_behav : MonoBehaviour {
   public int ItemID = -1;
   public List<Sprite> ItemImages = new List<Sprite>();
 
-  private range Xrange = new range(-200.0f, 200.0f);
-  private range Yrange = new range(-100.0f, 100.0f);
+  private range Xrange = new range();
+  private range Yrange = new range();
   private float WaitTime = 1.0f;
   private float GetThres = 5.0f;
   private int MaxItems = 5;
@@ -26,10 +29,14 @@ public class item_behav : MonoBehaviour {
   void Start() {
     GameObject[] ItemGOs = GameObject.FindGameObjectsWithTag("Item");
     PlayerGO = GameObject.Find("Player");
+    Xrange.min = Camera.main.ViewportToWorldPoint(Vector2.zero).x;
+    Yrange.min = Camera.main.ViewportToWorldPoint(Vector2.zero).y;
+    Xrange.max = Camera.main.ViewportToWorldPoint(Vector2.one).x;
+    Yrange.max = Camera.main.ViewportToWorldPoint(Vector2.one).y;
     Dest[0] = (Xrange.max - Xrange.min) * RandomRate() + Xrange.min;
     Dest[1] = (Yrange.max - Yrange.min) * RandomRate() + Yrange.min;
     if (ItemImages.Count == 0) {
-      Debug.Log("Specify prefabs of item.");
+      Debug.Log("Specify Images of item.");
       Destroy(gameObject);
     } else {
       if (ItemID < 0 || ItemID >= ItemImages.Count) {
