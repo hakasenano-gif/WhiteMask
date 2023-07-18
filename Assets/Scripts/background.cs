@@ -16,15 +16,13 @@ public class background : MonoBehaviour {
 
   public List<GameObject> BackgroundPrefabs = new List<GameObject>();
 
-  private GameObject PlayerGO;
+  private float Speed = 50.0f;
   private List<List<GameObject>> BackgroundGOs = new List<List<GameObject>>();
   private range Xrange = new range();
   private range Yrange = new range();
   private float Xsize, Ysize, Xbase, Ybase;
-  private Vector3 PlayerDelta = new Vector3(0.0f, 0.0f, 0.0f);
 
   void Start() {
-    PlayerGO = GameObject.Find("Player");
     Xrange.min = Camera.main.ViewportToWorldPoint(Vector2.zero).x;
     Yrange.min = Camera.main.ViewportToWorldPoint(Vector2.zero).y;
     Xrange.max = Camera.main.ViewportToWorldPoint(Vector2.one).x;
@@ -40,30 +38,23 @@ public class background : MonoBehaviour {
         List<GameObject> BackgroundGO = new List<GameObject>();
         BackgroundGO.Add(Object.Instantiate(BackgroundPrefabs[i]) as GameObject);
         BackgroundGO.Add(Object.Instantiate(BackgroundPrefabs[i]) as GameObject);
-        BackgroundGO.Add(Object.Instantiate(BackgroundPrefabs[i]) as GameObject);
-        BackgroundGO.Add(Object.Instantiate(BackgroundPrefabs[i]) as GameObject);
         BackgroundGOs.Add(BackgroundGO);
-        BackgroundGOs[i][0].transform.position = new Vector3(Xbase + Xsize / 2, Ybase + Ysize / 2, 10.0f + i);
-        BackgroundGOs[i][1].transform.position = new Vector3(Xbase + Xsize / 2, Ybase - Ysize / 2, 10.0f + i);
-        BackgroundGOs[i][2].transform.position = new Vector3(Xbase - Xsize / 2, Ybase + Ysize / 2, 10.0f + i);
-        BackgroundGOs[i][3].transform.position = new Vector3(Xbase - Xsize / 2, Ybase - Ysize / 2, 10.0f + i);
+        BackgroundGOs[i][0].transform.position = new Vector3(Xbase + Xsize / 2, Ybase, 10.0f + i);
+        BackgroundGOs[i][1].transform.position = new Vector3(Xbase - Xsize / 2, Ybase, 10.0f + i);
       }
     }
   }
 
   void Update() {
     if (BackgroundPrefabs.Count > 0) {
-      PlayerDelta = PlayerGO.transform.position;
-      PlayerGO.transform.position -= PlayerDelta;
       ScrollBackgrounds();
-      MoveItems();
     }
   }
 
   void ScrollBackgrounds() {
     for (int i = 0; i < BackgroundGOs.Count; i++) {
       for (int j = 0; j < BackgroundGOs[i].Count; j++) {
-        BackgroundGOs[i][j].transform.position -= PlayerDelta;
+        BackgroundGOs[i][j].transform.position -= new Vector3(Speed, 0.0f, 0.0f) * Time.deltaTime;
         if (BackgroundGOs[i][j].transform.position.x > Xbase + Xsize) {
           BackgroundGOs[i][j].transform.position -= new Vector3(Xsize * 2, 0.0f, 0.0f);
         } else if (BackgroundGOs[i][j].transform.position.x < Xbase - Xsize) {
@@ -75,13 +66,6 @@ public class background : MonoBehaviour {
           BackgroundGOs[i][j].transform.position += new Vector3(0.0f, Ysize * 2, 0.0f);
         }
       }
-    }
-  }
-
-  void MoveItems() {
-    GameObject[] ItemGOs = GameObject.FindGameObjectsWithTag("Item");
-    for (int i = 0; i < ItemGOs.Length; i++) {
-      ItemGOs[i].transform.position -= PlayerDelta;
     }
   }
 }
