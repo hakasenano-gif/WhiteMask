@@ -4,65 +4,78 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
-
 public class playercontoller : MonoBehaviour
 {
 
 	
-	public GameObject bulletPrefab;
+	public GameObject bulletPlayerPrefab;
+    public GameObject bladePrefab;
 
+
+    public int radius = 1;
     public int jump_max = 1;
-	public float speed = 0.02f;
+	public float speed = 2f;
 	public float fireRate = 0.2f;
-    [SerializeField]private int jump_now = 0;
-    private float MoveRange_x = 7f;
+    public float slash_cooldownmax = 0.1f;
+    private float slash_cooldown = 0.5f;
+    private float MoveRange_x = 8.6f;
     private float MoveRange_y = 4.5f; 
     private float nextfire = 0f;
-    [SerializeField] private float speed_tmp=0f; 
-    [SerializeField] private float jump_force=100f;
-	[SerializeField]private  bool Is_grounded = false;
-	[SerializeField]private bool Is_slow=false;
-    [SerializeField]private bool Is_jumping=false;
+    private string gameManagerTag = "GameController";
+    [SerializeField]private int jump_now = 0;
+    [SerializeField]private float speed_tmp = 0f; 
+    [SerializeField]private float jump_force = 100f;
+	[SerializeField]private bool Is_grounded = false;
+	[SerializeField]private bool Is_slow = false;
+    [SerializeField]private bool Is_jumping = false;
     [SerializeField]private bool Is_landing = false;
-
-    private Rigidbody2D rb;
-    /*Rigidbody2DのGravity Scaleをある程度大きくする必要がある*/
-	
-
+    private Rigidbody2D rb;	
+    private gamemanager gameManager;
 	
 
     // Start is called before the first frame update
     void Start()
     {
+        
+        GameObject GM_obj = GameObject.FindGameObjectWithTag(gameManagerTag);
+        gameManager = GM_obj.GetComponent<gamemanager>();
+
         rb=GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Static;
+        rb.gravityScale = 30;
+        
+        CircleCollider2D collider = GetComponent<CircleCollider2D> ();
+        collider.radius = radius;
     }
 
     // Update is called once per frame
     void Update()
     {
-        player_move();
-        player_shoot();
-        player_jump();
-        player_gravity();
-        grounding_evaluation();
-        player_slash();
+        if(gameManager.Is_paused == false)
+        {
+            player_move();
+            player_shoot();
+            player_jump();
+            player_gravity();
+            grounding_evaluation();
+            player_slash();
+        }
     }
     
     void player_move()
     {
         /*上下左右の入力による移動*/
         if (Input.GetKey (KeyCode.LeftArrow)) {
-			transform.Translate (-speed, 0, 0);
+			transform.Translate (-Time.deltaTime*speed, 0, 0);
 		}
 		if (Input.GetKey (KeyCode.RightArrow)) {
-			transform.Translate (speed, 0, 0);
+			transform.Translate (Time.deltaTime*speed, 0, 0);
 		}
         if ((Input.GetKey (KeyCode.UpArrow))&&(Is_landing==false)) {
-			transform.Translate (0, speed, 0);
+			transform.Translate (0, Time.deltaTime*speed, 0);
 		}
 		if (Input.GetKey ((KeyCode.DownArrow))&&(Is_landing==false)) {
-			transform.Translate ( 0, -speed, 0);
+			transform.Translate ( 0, -Time.deltaTime*speed, 0);
 		}
 
         /*プレイヤーの移動範囲の制限*/
@@ -74,7 +87,7 @@ public class playercontoller : MonoBehaviour
         if(Is_slow==false) speed_tmp=speed;	
 
 		if(Input.GetKey(KeyCode.LeftControl)) {
-			speed=0.01f;
+			speed=1f;
 			Is_slow=true;
 		}
 
@@ -86,25 +99,27 @@ public class playercontoller : MonoBehaviour
         /*着陸*/
         if((Input.GetKeyDown(KeyCode.S))&&(Is_grounded==true)&&(Is_landing==false)){ 
 		Is_landing=true;
-		SpeedUp(0.04f);	
+		SpeedUp(3f);	
 			}
 
         /*飛行*/
 		else if((Input.GetKeyDown(KeyCode.S))&&(Is_grounded==false)&&(Is_landing==true)){
 			Is_landing=false;
-			SpeedUp(-0.04f);
+			SpeedUp(-3f);
 			}
     }
 
     void player_shoot()
     {
+        
         if (Input.GetKey (KeyCode.Z)&&nextfire<=0f) {
-			Instantiate (bulletPrefab, transform.position, Quaternion.identity);
+			Instantiate (bulletPlayerPrefab, transform.position, Quaternion.identity);
 			nextfire=fireRate;
 		}
 		if(nextfire>=0f){
 			nextfire-=Time.deltaTime;
 	        }
+        
     }
 
     void player_gravity()
@@ -144,11 +159,14 @@ public class playercontoller : MonoBehaviour
 
     void player_slash()
     {
-
-        /*If((Input.GetKeyDown(KeyCode.X))&&(IS_landing==true))
+        slash_cooldown -=Time.deltaTime;
+        if((Input.GetKeyDown(KeyCode.X))&&(Is_landing==true)&&(slash_cooldown < 0f))
         {
-        }    
-        */
+         Instantiate(bladePrefab,new Vector3(transform.position.x + 0.5f,transform.position.y,transform.position.z), Quaternion.identity);   
+         slash_cooldown = slash_cooldownmax;
+        }
+            
+        
     
     }
 /*～～～ここから他の構造体からの操作が可能～～～*/
@@ -165,6 +183,10 @@ public class playercontoller : MonoBehaviour
     public void MaxJumpNumberUp(int rise_max_jump)
     {
         jump_max += rise_max_jump;
+    }
+    public void hit ()
+    {
+        Destroy(gameObject);
     }
 }
 
