@@ -1,34 +1,58 @@
+/*
+編集履歴
+変数名の変更(enemy_spawn_timerとenemy_spawn_timer_max
+をそれぞれnextEnemySpawnTimeとenemySpawnRateに変更)
+
+nextEnemySpawnTimeとstage_timeをパブリック変数に，
+enemySpawnRateとstage_time_maxをプライベート変数に変更
+
+シングルトンの導入
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class gamemanager : MonoBehaviour
 {	
+	public static gamemanager instance;
 	public GameObject mob01;
 	public GameObject mob02;
 	public GameObject mob03;
 	public GameObject mob04;
-
-	public int difficulty;
-	public float stage_time_max = 60f;
-	public float enemy_spawn_timer_max;
+	public float nextEnemySpawnTime;
+	public float stage_time;
 	public bool Is_paused = false;
-	[SerializeField]private float enemy_spawn_timer; 
-	[SerializeField]private float stage_time;
+
+	[SerializeField]private int difficulty = 0;
+	[SerializeField]private float stage_time_max = 60f;
+	[SerializeField]private float enemySpawnRate = 3f;	
 	[SerializeField]private bool boss_appeared = false;
-	[SerializeField]private bool boss_beaten = false;
-	
+
+	void Awake()
+    {
+        if(instance == null) instance = this;
+        else                 Destroy (gameObject);
+		DontDestroyOnLoad(gameObject);
+    }
+
+
 	void Start()
 	{	
+
 		difficulty = 0;
 		stage_time = stage_time_max;
-		enemy_spawn_timer_max = 3f;
-		enemy_spawn_timer = enemy_spawn_timer_max;
+		nextEnemySpawnTime = enemySpawnRate;
 		
 		
 	}
 
+/*Update関数にはプレイヤーの操作を受け付けて何らかの処理を行うもの，FixedUpdate関数には
+プレイヤーの操作に関わらず処理するものを記述するのが望ましい
+Pause関数でタイムスケールをゼロにして，ゲームをポーズできるようにしているが，
+Update関数内のものはこの値に関わらず動く．*/
 
 	void Update()
 	{
@@ -37,37 +61,33 @@ public class gamemanager : MonoBehaviour
 
     void FixedUpdate()
 	{
-		enemySpawn();
+		if(boss_appeared == false) MainStageProcess();
+		else 					  BossStageProcess();
 	}
 
-	void enemySpawn()
+	void MainStageProcess()
 	{
 		if (stage_time > 0)
 		{
 			stage_time -= Time.deltaTime;
-			enemy_spawn_timer -=Time.deltaTime;
+			nextEnemySpawnTime -=Time.deltaTime;
 
-			if(enemy_spawn_timer < 0)
+			if(nextEnemySpawnTime < 0)
 			{	
 				spawn_event(4*difficulty+Random.Range(0,4));
 				/*0から11までの範囲をとる
 
 				Random.Rangeは第一引数<=x<第二引数の範囲の値を取るということに注意*/
-				enemy_spawn_timer = enemy_spawn_timer_max;
+				nextEnemySpawnTime = enemySpawnRate;
 			}				
 			
 		}
 		else 
 		{
-			if (boss_appeared == false) {
-			/*ボスを出す*/
+			stage_time = stage_time_max;
+			difficulty += 1;
 			boss_appeared = true;
-			}
-			else if (boss_appeared == true) /*ボスが倒された*/
-			boss_appeared = false;
-			boss_beaten   = false;
-			stage_time    = stage_time_max;
-			difficulty   += 1;
+			SceneManager.LoadScene("BossScene");
 		}
 	}
 
@@ -102,9 +122,18 @@ public class gamemanager : MonoBehaviour
 			default:
 				break;
 		}
+	}
+
+/*ボスシーン*/
+	void BossStageProcess()
+	{
 
 
-	}	
+
+		SceneManager.LoadScene("MainScene");
+		boss_appeared = false;
+	}
+
 	void gamePause()
 	{
 		if(Input.GetKeyDown(KeyCode.Escape))
@@ -122,8 +151,3 @@ public class gamemanager : MonoBehaviour
 		} 
 	}
 }
-
-
-
-
-
