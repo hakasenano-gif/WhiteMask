@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class animation : MonoBehaviour {
+  public float Scale = 1.0f;
   public float Interval = 1.0f;
   public List<Sprite> Images = new List<Sprite>();
 
@@ -14,6 +15,7 @@ public class animation : MonoBehaviour {
       Debug.Log("Specify Image(s).");
       Destroy(gameObject);
     } else {
+      gameObject.transform.localScale = Vector3.one * Scale;
       gameObject.GetComponent<SpriteRenderer>().sprite = Images[0];
     }
   }
