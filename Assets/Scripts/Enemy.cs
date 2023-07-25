@@ -1,3 +1,8 @@
+/*編集履歴
+最初にゲームマネージャーを探索する処理を追加
+エネミー撃破時，score加算されるように変更
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,18 +12,20 @@ public class  Enemy: MonoBehaviour
 {
 	
 	public int hp;
+	public int Score;
 	public  float firerate;
+	public  float nextfire;
 	public float size;
-	private  float nextfire;
 	public float time;
 	private float spawn_range_x;
 	private float spawn_range_y;
-
+	public GameObject gamemanager;
 	public Rigidbody2D rb;
  	
     // Start is called before the first frame update
     void Start()
     {
+	gamemanager = GameObject.Find("Gamemanager");
 	CircleCollider2D collider = GetComponent<CircleCollider2D> ();
 	Rigidbody2D rb = GetComponent<Rigidbody2D>();
 	this.tag = "enemy";
@@ -27,7 +34,6 @@ public class  Enemy: MonoBehaviour
 	collider.isTrigger = true;
 	spawn_range_x = 12f;
 	spawn_range_y = 10f;
-	rb.bodyType = RigidbodyType2D.Kinematic; 
     }
 
     // Update is called once per frame
@@ -57,6 +63,8 @@ public class  Enemy: MonoBehaviour
 		if (hp>=2) hp-=1;
 		else 
 		{
+			gamemanager.SendMessage("AddScore",Score);
+			OnEnemyDeath();
 			Destroy(gameObject);
 		}
 	}
@@ -88,5 +96,8 @@ public class  Enemy: MonoBehaviour
 	{
 	}
 
+	public virtual void OnEnemyDeath()
+	{
 
+	}
 }
