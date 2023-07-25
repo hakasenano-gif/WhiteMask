@@ -1,3 +1,10 @@
+/*編集履歴
+ライフをゲームマネージャーで管理するように
+ダメージを受けた後の一定時間の無敵時間を追加
+→無敵時間の長さはinvincibilityTime_maxで管理
+
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,21 +17,24 @@ public class playercontoller : MonoBehaviour
 	
 	public GameObject bulletPlayerPrefab;
     public GameObject bladePrefab;
+    public GameObject Gamemanager_obj;
 
     public int radius = 1;
-	public float speed = 2f;
+    public float speed = 3f;
 	public float fireRate = 0.2f;
-    public float slash_cooldownmax = 0.1f;
-    private float slash_cooldown = 0.1f;
+    public float slash_cooldownmax = 5f;
+    public float invincibilityTime_max = 1f;
+    private float invincibilityTime;
+    private float slash_cooldown;
     private float MoveRange_x = 8.6f;
     private float MoveRange_y = 4.5f; 
     private float nextfire = 0f;
-    private string gameManagerTag = "GameController";
+
+
     [SerializeField]private float speed_tmp = 0f; 
     [SerializeField]private bool Is_slow = false;
     private Rigidbody2D rb;	
-    private gamemanager gameManager;
-
+    private gamemanager Gamemanager;
     /*空中戦(メインステージ)かの判定*/
     public bool Is_airBattle;
 
@@ -40,9 +50,9 @@ public class playercontoller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        GameObject GM_obj = GameObject.FindGameObjectWithTag(gameManagerTag);
-        gameManager = GM_obj.GetComponent<gamemanager>();
+        Gamemanager_obj = GameObject.Find("Gamemanager");
+        Gamemanager = Gamemanager_obj.GetComponent<gamemanager>();
+
 
         rb=GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Static;
@@ -55,7 +65,7 @@ public class playercontoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameManager.Is_paused == false)
+        if(Gamemanager.Is_paused == false)
         {            
             
             player_move();
@@ -70,6 +80,11 @@ public class playercontoller : MonoBehaviour
                 grounding_evaluation();
             }
         }
+    }
+
+    void FixedUpdate()
+    {
+        if(invincibilityTime > 0) invincibilityTime -= Time.deltaTime;
     }
     
     void player_move()
@@ -202,7 +217,17 @@ public class playercontoller : MonoBehaviour
     }
     public void hit ()
     {
-        Destroy(gameObject);
+        if(invincibilityTime <= 0)
+        {
+            if(Gamemanager.PC_Life > 1)
+            Gamemanager.PC_Life -=1;
+            else Destroy(gameObject);
+            invincibilityTime = invincibilityTime_max;
+        }
+    }
+    public void LifeUp()
+    {
+    if(Gamemanager.PC_Life_MAX > Gamemanager.PC_Life) Gamemanager.PC_Life +=1;
     }
 }
 
