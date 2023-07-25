@@ -1,12 +1,9 @@
 /*
 編集履歴
-変数名の変更(enemy_spawn_timerとenemy_spawn_timer_max
-をそれぞれnextEnemySpawnTimeとenemySpawnRateに変更)
-
-nextEnemySpawnTimeとstage_timeをパブリック変数に，
-enemySpawnRateとstage_time_maxをプライベート変数に変更
-
-シングルトンの導入
+画面上下端を表す変数MoveRange_yを作成
+空中面で出現する敵の種類や初期位置などの調整
+エネミーを倒した際にスコア加算されるように変更(AddScore)
+PCのライフをゲームマネージャーに追加
 */
 
 using System.Collections;
@@ -22,11 +19,17 @@ public class gamemanager : MonoBehaviour
 	public GameObject mob02;
 	public GameObject mob03;
 	public GameObject mob04;
+	public int Score;
+	public int PC_Life;
+	public int PC_Life_MAX = 3;
+
+	
 	public float nextEnemySpawnTime;
 	public float stage_time;
 	public bool Is_paused = false;
 
 	[SerializeField]private int difficulty = 0;
+	[SerializeField]private float MoveRange_y = 4.5f;
 	[SerializeField]private float stage_time_max = 60f;
 	[SerializeField]private float enemySpawnRate = 3f;	
 	[SerializeField]private bool boss_appeared = false;
@@ -38,14 +41,13 @@ public class gamemanager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
     }
 
-
 	void Start()
 	{	
 
 		difficulty = 0;
 		stage_time = stage_time_max;
 		nextEnemySpawnTime = enemySpawnRate;
-		
+		PC_Life = PC_Life_MAX;
 		
 	}
 
@@ -98,7 +100,7 @@ Update関数内のものはこの値に関わらず動く．*/
 		switch (event_number)
 		{
 			case 0:
-				Instantiate (mob01, new Vector3(random_x,random_y,transform.position.z) , Quaternion.identity);
+				Instantiate (mob01, new Vector3(random_x,-MoveRange_y,transform.position.z) , Quaternion.identity);
 				break;
 			case 1:
 				Instantiate (mob02, new Vector3(random_x,random_y,transform.position.z) , Quaternion.identity);
@@ -150,4 +152,10 @@ Update関数内のものはこの値に関わらず動く．*/
 			}
 		} 
 	}
+
+	public void AddScore(int EnemyScore)
+	{
+		Score += EnemyScore;
+	}
+
 }
