@@ -238,6 +238,3 @@ public class player_controller : MonoBehaviour
     if(Gamemanager.PC_Life_MAX > Gamemanager.PC_Life) Gamemanager.PC_Life +=1;
     }
 }
-
-	
-
