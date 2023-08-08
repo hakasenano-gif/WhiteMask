@@ -93,7 +93,7 @@ public class item_behav : MonoBehaviour {
     if (Dist(this.transform.position, PlayerGO.transform.position) < GetThres) {
       switch (ItemID) {
         case 0:
-          PlayerGO.GetComponent<playercontoller>().SpeedUp(0.5f);
+          PlayerGO.GetComponent<player_controller>().SpeedUp(0.5f);
           break;
       }
       Destroy(gameObject);

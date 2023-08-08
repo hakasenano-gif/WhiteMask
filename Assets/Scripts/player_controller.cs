@@ -11,7 +11,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
-public class playercontoller : MonoBehaviour
+public class player_controller : MonoBehaviour
 {
 
 	
@@ -22,10 +22,10 @@ public class playercontoller : MonoBehaviour
     public int radius = 1;
     public float speed = 3f;
 	public float fireRate = 0.2f;
+    public float slash_cooldown;
     public float slash_cooldownmax = 5f;
     public float invincibilityTime_max = 1f;
     private float invincibilityTime;
-    private float slash_cooldown;
     private float MoveRange_x = 8.6f;
     private float MoveRange_y = 4.5f; 
     private float nextfire = 0f;
@@ -219,10 +219,18 @@ public class playercontoller : MonoBehaviour
     {
         if(invincibilityTime <= 0)
         {
-            if(Gamemanager.PC_Life > 1)
             Gamemanager.PC_Life -=1;
-            else Destroy(gameObject);
-            invincibilityTime = invincibilityTime_max;
+
+            if(Gamemanager.PC_Life > 0)
+            {
+                invincibilityTime = invincibilityTime_max;
+            }
+            else
+            {
+            /*爆発のアニメーション*/
+            Gamemanager.onPlayerDeath();
+            Destroy(gameObject);
+            }
         }
     }
     public void LifeUp()
@@ -230,6 +238,3 @@ public class playercontoller : MonoBehaviour
     if(Gamemanager.PC_Life_MAX > Gamemanager.PC_Life) Gamemanager.PC_Life +=1;
     }
 }
-
-	
-
