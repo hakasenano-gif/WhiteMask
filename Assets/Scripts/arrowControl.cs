@@ -8,8 +8,12 @@ public class arrowControl : MonoBehaviour
     public RectTransform rect;
     public int choiceNum=0;
     public GameObject Gamemanager;
+    public AudioClip se_select;
+    AudioSource audioSource;
+    
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rect = GetComponent < RectTransform > ();
     }
 
@@ -20,11 +24,13 @@ public class arrowControl : MonoBehaviour
         {
             if(choiceNum == 1)
             {
+                audioSource.PlayOneShot(se_select);
                 rect.localPosition -= new Vector3(0,55,0);
                 choiceNum=2;                
             }
             if(choiceNum == 0) 
             {
+                audioSource.PlayOneShot(se_select);
                 rect.localPosition -= new Vector3(0,55,0);
                 choiceNum=1;
             }
@@ -33,11 +39,13 @@ public class arrowControl : MonoBehaviour
         {
             if(choiceNum == 1) 
             {
+                audioSource.PlayOneShot(se_select);
                 rect.localPosition += new Vector3(0,55,0);
                 choiceNum=0;
             }
             if(choiceNum == 2)
             {
+                audioSource.PlayOneShot(se_select);
                 rect.localPosition += new Vector3(0,55,0);
                 choiceNum=1;                
             }
@@ -45,8 +53,9 @@ public class arrowControl : MonoBehaviour
 
         if((Input.GetKeyDown (KeyCode.Z))||Input.GetKeyDown(KeyCode.Return))
         {
+            
             switch(choiceNum)
-            {
+            {  
                 case 0:
                     Gamemanager.SendMessage("ResumeGame");
                     break;

@@ -18,6 +18,14 @@ public class player_controller : MonoBehaviour
 	public GameObject bulletPlayerPrefab;
     public GameObject bladePrefab;
     public GameObject Gamemanager_obj;
+    public GameObject player_death_effect;
+    private SpriteRenderer sprite;
+    public AudioClip se_shoot;
+    public AudioClip se_slash;
+    public AudioClip se_hitted;
+    private Animator animator; 
+    AudioSource audioSource;
+    
 
     public int radius = 1;
     public float speed = 3f;
@@ -25,13 +33,15 @@ public class player_controller : MonoBehaviour
     public float slash_cooldown;
     public float slash_cooldownmax = 5f;
     public float invincibilityTime_max = 1f;
-    private float invincibilityTime;
+    public float invincibilityTime;
+    private int flash_i;
     private float MoveRange_x = 8.6f;
     private float MoveRange_y = 4.5f; 
     private float nextfire = 0f;
+    
 
 
-    [SerializeField]private float speed_tmp = 0f; 
+    [SerializeField]private float speed_tmp = 3f; 
     [SerializeField]private bool Is_slow = false;
     private Rigidbody2D rb;	
     private gamemanager Gamemanager;
@@ -50,6 +60,9 @@ public class player_controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         Gamemanager_obj = GameObject.Find("Gamemanager");
         Gamemanager = Gamemanager_obj.GetComponent<gamemanager>();
 
@@ -84,7 +97,10 @@ public class player_controller : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(invincibilityTime > 0) invincibilityTime -= Time.deltaTime;
+        if(invincibilityTime > 0) 
+        {
+            invincibilityTime -= Time.deltaTime;
+        }
     }
     
     void player_move()
@@ -140,6 +156,7 @@ public class player_controller : MonoBehaviour
     {
         
         if (Input.GetKey (KeyCode.Z)&&nextfire<=0f) {
+             audioSource.PlayOneShot(se_shoot);
 			Instantiate (bulletPlayerPrefab, transform.position, Quaternion.identity);
 			nextfire=fireRate;
 		}
@@ -154,8 +171,9 @@ public class player_controller : MonoBehaviour
         slash_cooldown -=Time.deltaTime;
         if((Input.GetKeyDown(KeyCode.X))&&(slash_cooldown < 0f))
         {
-         Instantiate(bladePrefab,new Vector3(transform.position.x + 0.5f,transform.position.y,transform.position.z), Quaternion.identity);   
-         slash_cooldown = slash_cooldownmax;
+            audioSource.PlayOneShot(se_slash);
+            Instantiate(bladePrefab,new Vector3(transform.position.x + 0.5f,transform.position.y,transform.position.z), Quaternion.identity);   
+            slash_cooldown = slash_cooldownmax;
         }
                 
     }
@@ -199,6 +217,17 @@ public class player_controller : MonoBehaviour
         else Is_jumping=false;
     }
 
+    IEnumerator flash()
+    {
+        while(invincibilityTime > 0)
+        {
+            yield return null;
+        }
+        animator.SetBool("flashing", false);
+    }
+
+
+
 
 /*～～～ここから他の構造体からの操作が可能～～～*/
     public void SpeedUp(float rise_speed)
@@ -223,16 +252,21 @@ public class player_controller : MonoBehaviour
 
             if(Gamemanager.PC_Life > 0)
             {
+                audioSource.PlayOneShot(se_hitted);
                 invincibilityTime = invincibilityTime_max;
+                animator.SetBool("flashing", true);
+                StartCoroutine("flash");
             }
             else
             {
-            /*爆発のアニメーション*/
-            Gamemanager.onPlayerDeath();
-            Destroy(gameObject);
+                Instantiate(player_death_effect, transform.position, Quaternion.Euler(0f, 0f, 0));
+                Gamemanager.SendMessage("onPlayerDeath");
+                Destroy(gameObject);
             }
+            
         }
     }
+
     public void LifeUp()
     {
     if(Gamemanager.PC_Life_MAX > Gamemanager.PC_Life) Gamemanager.PC_Life +=1;
