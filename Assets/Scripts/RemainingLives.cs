@@ -20,7 +20,7 @@ public class RemainingLives : MonoBehaviour {
     }
   }
 
-  void Update() {
+  void FixedUpdate() {
     int LiveGOsCount;
     float RemainingLivesXbase, RemainingLivesYbase, LivesXStart;
     if (LivePrefab) {

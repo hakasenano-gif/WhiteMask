@@ -26,7 +26,7 @@ public class LifeGage : MonoBehaviour {
     }
   }
 
-  void Update() {
+  void FixedUpdate() {
     float BossLifeRate;
     if (BossGO) {
       BossLifeRate = (float)BossGO.GetComponent<Enemy>().hp / BossLifeMax;

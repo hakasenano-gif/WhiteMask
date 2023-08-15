@@ -50,7 +50,7 @@ public class background : MonoBehaviour {
     }
   }
 
-  void Update() {
+  void FixedUpdate() {
     if (BackgroundPrefabs.Count > 0) {
       ScrollBackgrounds();
     }
