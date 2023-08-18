@@ -148,7 +148,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 2.3
 --- !u!114 &3653882833196160172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +169,9 @@ MonoBehaviour:
   size: 0
   time: 0
   gamemanager: {fileID: 0}
+  enemy_death_effect: {fileID: 3682308043618869974, guid: 68c89704f77b2d347a11773c7e4cd298, type: 3}
   rb: {fileID: 0}
+  se_death: {fileID: 8300000, guid: a24e20c85cdccc841b6f6bacd940ec4f, type: 3}
   speed: 0.09
   bullet_ghost: {fileID: 2426614712316499183, guid: 2c6b595ee85345d4788411147db50d1b, type: 3}
 --- !u!1 &3381487417290700469
@@ -320,7 +322,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 2.3
 --- !u!114 &1979505311423158425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +343,9 @@ MonoBehaviour:
   size: 0
   time: 0
   gamemanager: {fileID: 0}
+  enemy_death_effect: {fileID: 3682308043618869974, guid: 68c89704f77b2d347a11773c7e4cd298, type: 3}
   rb: {fileID: 0}
+  se_death: {fileID: 8300000, guid: a24e20c85cdccc841b6f6bacd940ec4f, type: 3}
   speed: 0.09
   bullet_ghost: {fileID: 2426614712316499183, guid: 2c6b595ee85345d4788411147db50d1b, type: 3}
 --- !u!1 &4197884448866536718
@@ -492,7 +496,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 2.3
 --- !u!114 &1543307028646245615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +517,9 @@ MonoBehaviour:
   size: 0
   time: 0
   gamemanager: {fileID: 0}
+  enemy_death_effect: {fileID: 3682308043618869974, guid: 68c89704f77b2d347a11773c7e4cd298, type: 3}
   rb: {fileID: 0}
+  se_death: {fileID: 8300000, guid: a24e20c85cdccc841b6f6bacd940ec4f, type: 3}
   speed: 0.09
   bullet_ghost: {fileID: 2426614712316499183, guid: 2c6b595ee85345d4788411147db50d1b, type: 3}
 --- !u!1 &4852988541616341361
@@ -541,7 +547,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4852988541616341361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -718,7 +724,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 2.3
 --- !u!114 &6630107896464117519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,6 +745,8 @@ MonoBehaviour:
   size: 0
   time: 0
   gamemanager: {fileID: 0}
+  enemy_death_effect: {fileID: 3682308043618869974, guid: 68c89704f77b2d347a11773c7e4cd298, type: 3}
   rb: {fileID: 0}
+  se_death: {fileID: 8300000, guid: a24e20c85cdccc841b6f6bacd940ec4f, type: 3}
   speed: 0.09
   bullet_ghost: {fileID: 2426614712316499183, guid: 2c6b595ee85345d4788411147db50d1b, type: 3}

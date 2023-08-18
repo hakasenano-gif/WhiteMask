@@ -11,7 +11,7 @@ public class bullet_poisonSlime : bulletEnemyParent
     private float UpForce = 12f;		
     public override void initialize()
     {
-        radius = 0.3f;
+        radius = 0.9f;
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(-Mathf.Cos(transform.rotation.z),-Mathf.Sin(transform.rotation.z)) * UpForce , ForceMode2D.Impulse);
     }

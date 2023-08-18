@@ -9,7 +9,7 @@ public class bullet_ghost : bulletEnemyParent
 {
     public override void initialize()
     {
-        radius = 0.3f;
+        radius = 2.2f;
         speed = 0.15f;
     }
 

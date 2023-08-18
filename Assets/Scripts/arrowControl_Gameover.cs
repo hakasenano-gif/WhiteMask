@@ -8,8 +8,12 @@ public class arrowControl_Gameover : MonoBehaviour
     public RectTransform rect;
     public int choiceNum=0;
     public GameObject Gamemanager;
+    public AudioClip se_select;
+    AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rect = GetComponent < RectTransform > ();
     }
 
@@ -20,6 +24,7 @@ public class arrowControl_Gameover : MonoBehaviour
         {
             if(choiceNum == 0) 
             {
+                audioSource.PlayOneShot(se_select);
                 rect.localPosition -= new Vector3(0,30,0);
                 choiceNum=1;
             }
@@ -28,6 +33,7 @@ public class arrowControl_Gameover : MonoBehaviour
         {
             if(choiceNum == 1) 
             {
+                audioSource.PlayOneShot(se_select);
                 rect.localPosition += new Vector3(0,30,0);
                 choiceNum=0;
             }

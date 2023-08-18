@@ -17,7 +17,7 @@ public class mob_mermaid : Enemy
 		hp = 9;
 		firerate = 5f;
 		nextfire = 3f;
-		size = 1f;
+		size = 2.5f;
 		Score = 800;
 		stopPos = Random.Range(0.0f,8.5f);	
 	}

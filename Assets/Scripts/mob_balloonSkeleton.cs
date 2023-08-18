@@ -18,7 +18,7 @@ public class Mob_balloonSkeleton : Enemy
 	
 	public override void initialize()
 	{
-		hp = 3;
+		hp = 7;
 		firerate = 5f;
 		nextfire = 3f;
 		size = 2.7f;

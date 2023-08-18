@@ -9,7 +9,7 @@ public class bullet_slime : bulletEnemyParent
 {
     public override void initialize()
     {
-        radius = 0.3f;
+        radius = 0.8f;
         speed = 0.07f;
     }
 

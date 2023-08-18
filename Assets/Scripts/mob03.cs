@@ -22,7 +22,7 @@ public class Mob3 : Enemy
         Instantiate (bulletEnemy01, transform.position, Quaternion.Euler(0f, 0f, 30f));
         Instantiate (bulletEnemy01, transform.position, Quaternion.Euler(0f, 0f, -30f));
 	}
-	public override void move(float t)
+	public override void move()
 	{
         if(time<=1) transform.Translate(-0.1f,0,0);
         else transform.Translate (-0.02f, 0, 0);

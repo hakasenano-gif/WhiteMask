@@ -19,6 +19,7 @@ public class mob_ghost : Enemy
 		firerate = 5f;
 		nextfire = 3f;
 		Score = 100;
+		size = 2.3f;
 		Gamemanager = gamemanager.GetComponent<gamemanager>();
 
 	}

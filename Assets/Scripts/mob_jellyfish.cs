@@ -21,7 +21,7 @@ public class jellyFish : Enemy
 
 		hp = 5;
 		firerate=100f;
-		size = 0.3f;
+		size = 2.5f;
 		target = GameObject.FindGameObjectWithTag(targetTag);
 		
 	}
