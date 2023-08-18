@@ -15,8 +15,8 @@ public class background : MonoBehaviour {
   }
 
   public List<GameObject> BackgroundPrefabs = new List<GameObject>();
-
-  private float Speed = 50.0f;
+  public float Speed = 50.0f;
+  
   private List<List<GameObject>> BackgroundGOs = new List<List<GameObject>>();
   private range CamXrange = new range();
   private range CamYrange = new range();
@@ -46,6 +46,7 @@ public class background : MonoBehaviour {
         BackgroundGOs[i][1].GetComponent<animation>().Scale = ObjScale;
         BackgroundGOs[i][0].transform.position = new Vector3(CamXbase + ObjXsize / 2, CamYbase, 10.0f + i);
         BackgroundGOs[i][1].transform.position = new Vector3(CamXbase - ObjXsize / 2, CamYbase, 10.0f + i);
+        BackgroundGOs[i][1].GetComponent<SpriteRenderer>().flipX = true;
       }
     }
   }
