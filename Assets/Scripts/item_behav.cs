@@ -50,7 +50,7 @@ public class item_behav : MonoBehaviour {
     }
   }
 
-  void Update() {
+  void FixedUpdate() {
     if (ItemImages.Count > 0) {
       RandomMove();
       CheckPlayerDist();

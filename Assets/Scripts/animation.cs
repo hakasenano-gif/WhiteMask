@@ -20,7 +20,7 @@ public class animation : MonoBehaviour {
     }
   }
 
-  void Update() {
+  void FixedUpdate() {
     PassedTime += Time.deltaTime;
     if (PassedTime >= Interval) {
       PassedTime -= Interval;
