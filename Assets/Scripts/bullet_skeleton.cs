@@ -10,7 +10,7 @@ public class bullet_skeleton : bulletEnemyParent
 
     public override void initialize()
     {
-        radius = 0.3f;
+        radius = 2f;
         speed = -0.075f;
     }
     

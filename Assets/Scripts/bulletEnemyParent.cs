@@ -15,6 +15,7 @@ public class bulletEnemyParent : MonoBehaviour
     public string targetTag = "Player";
     public GameObject target;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,9 @@ public class bulletEnemyParent : MonoBehaviour
 
         move();
         out_range_process();
-        /*raycastを使った衝突判定開始*/
+        /*raycastを使った衝突判定
+        処理が重いため，一時的に無効化
+        
         CF_pos = transform.position;
         dir = (CF_pos - LF_pos).normalized;
         dis = Vector2.Distance(CF_pos,LF_pos);
@@ -47,7 +50,7 @@ public class bulletEnemyParent : MonoBehaviour
             }
         }
         LF_pos = CF_pos;
-        /*raycastを使った衝突判定終了*/
+        */
     }
     public virtual void initialize()
     {
@@ -74,14 +77,18 @@ public class bulletEnemyParent : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if(collision.gameObject.CompareTag("Player")) 
+        if(collision.gameObject.CompareTag(targetTag)) 
         {
             collision.gameObject.SendMessage("hit");
             Destroy (gameObject);
         }
         else if(collision.gameObject.CompareTag("slash"))
         {
-            Destroy (gameObject);
+            slashProcess();
         }
+    }
+    public virtual void slashProcess()
+    {
+        Destroy(gameObject);
     }
 }

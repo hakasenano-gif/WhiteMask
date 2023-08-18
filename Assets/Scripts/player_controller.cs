@@ -155,7 +155,7 @@ public class player_controller : MonoBehaviour
     void player_shoot()
     {
         
-        if (Input.GetKey (KeyCode.Z)&&nextfire<=0f) {
+        if (Input.GetKey (KeyCode.Space)&&nextfire<=0f) {
              audioSource.PlayOneShot(se_shoot);
 			Instantiate (bulletPlayerPrefab, transform.position, Quaternion.identity);
 			nextfire=fireRate;
@@ -272,3 +272,6 @@ public class player_controller : MonoBehaviour
     if(Gamemanager.PC_Life_MAX > Gamemanager.PC_Life) Gamemanager.PC_Life +=1;
     }
 }
+
+	
+

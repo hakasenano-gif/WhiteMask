@@ -1,6 +1,6 @@
 /*編集履歴
 最初にゲームマネージャーを探索する処理を追加
-エネミー撃破時，score加算されるように変更
+エネミー討伐時，score加算されるように変更
 */
 
 using System.Collections;
@@ -11,8 +11,10 @@ using UnityEngine;
 public class  Enemy: MonoBehaviour
 {
 	
+	
 	public int hp;
 	public int Score;
+	public int dropItemType;
 	public  float firerate;
 	public  float nextfire;
 	public float size;
@@ -20,11 +22,15 @@ public class  Enemy: MonoBehaviour
 	private float spawn_range_x;
 	private float spawn_range_y;
 	public GameObject gamemanager;
+	public GameObject enemy_death_effect;
 	public Rigidbody2D rb;
+	public AudioClip se_death;
+    AudioSource audioSource;
  	
     // Start is called before the first frame update
     void Start()
     {
+	audioSource = GetComponent<AudioSource>();
 	gamemanager = GameObject.Find("Gamemanager");
 	CircleCollider2D collider = GetComponent<CircleCollider2D> ();
 	Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -40,14 +46,14 @@ public class  Enemy: MonoBehaviour
     void FixedUpdate()
     {
 			time+=Time.deltaTime;
-			move(time);
+			move();
 
 	    /*発射処理*/
-		if((nextfire<firerate)&&(transform.position.x>-9f)&&(transform.position.x<9f))  nextfire+=Time.deltaTime;
-        if (nextfire>=firerate) 
+		if((nextfire>0)&&(transform.position.x>-9f)&&(transform.position.x<8.5f))  nextfire-=Time.deltaTime;
+        if (nextfire<=0) 
 	    {
 		    attack();
-    	    nextfire=0f;
+    	    nextfire=firerate;
 	    }
 	 
 		/*一定範囲の外に出た際に破壊する処理*/
@@ -60,12 +66,11 @@ public class  Enemy: MonoBehaviour
 
 	public void hit()
 	{
-		if (hp>=2) hp-=1;
+		if (hp > 1) hp-=1;
 		else 
 		{
-			gamemanager.SendMessage("AddScore",Score);
 			OnEnemyDeath();
-			Destroy(gameObject);
+			
 		}
 	}
 
@@ -74,11 +79,11 @@ public class  Enemy: MonoBehaviour
 		if (hp>=16) hp-=15;
 		else 
 		{
-			Destroy(gameObject);
+			OnEnemyDeath();
 		}
 	}
 
- 	public void OnTriggerEnter2D(Collider2D collision)
+ 	public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         
         if(collision.gameObject.CompareTag("Player")) 
@@ -92,12 +97,36 @@ public class  Enemy: MonoBehaviour
 	public virtual void attack()
 	{
 	}
-	public virtual void move(float t)
+	public virtual void move()
 	{
 	}
 
 	public virtual void OnEnemyDeath()
 	{
+		
+		Instantiate(enemy_death_effect, transform.position, Quaternion.Euler(0f, 0f, 0));
+		gamemanager.SendMessage("AddScore",Score);
+		int ramdomValue = Random.Range(0,101);
+		switch(dropItemType)
+		{
+			case 0:
+			{
+				if(ramdomValue < 10)
+				{
+					/*アイテム1を落とす*/
+				}
+				else if((ramdomValue >10)&&((ramdomValue < 50)))
+				{
+					/*得点アイテムを落とす*/
+				}
+				break; 
+			}
+			case 1:
+				break;
+			case 2:
+				break;
 
+		}
+		Destroy(gameObject);
 	}
 }

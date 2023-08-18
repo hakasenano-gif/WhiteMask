@@ -17,30 +17,31 @@ public class PrintStageNum : MonoBehaviour
         printText.text = "Stage 1".ToString();
 		}
 
-		if(SceneManager.GetActiveScene().name == "MainScene2")
+		else if(SceneManager.GetActiveScene().name == "MainScene2")
 		{
         printText.text = "Stage 2".ToString();
 		}
 
-		if(SceneManager.GetActiveScene().name == "MainScene3")
+		else if(SceneManager.GetActiveScene().name == "MainScene3")
 		{
         printText.text = "Stage 3".ToString();
 		}
 
-		if(SceneManager.GetActiveScene().name == "BossScene1")
+		else if(SceneManager.GetActiveScene().name == "BossScene1")
 		{
-        printText.text = "ボス：ドラゴン".ToString();
+        printText.text = "ボス：悪魔".ToString();
 		}
 
-		if(SceneManager.GetActiveScene().name == "BossScene2")
+		else if(SceneManager.GetActiveScene().name == "BossScene2")
 		{
         printText.text = "ボス：魔王".ToString();
 		}
 
-		if(SceneManager.GetActiveScene().name == "BossScene3")
+		else if(SceneManager.GetActiveScene().name == "BossScene3")
 		{
-        printText.text = "ボス：you".ToString();
+        printText.text = "ボス：ドラゴン".ToString();
 		}
+		else printText.text = "".ToString();
     }
     void Update()
     {

@@ -18,11 +18,11 @@ public class mob05 : Enemy
 	{
 		Instantiate (bulletEnemy03, transform.position,Quaternion.Euler(0.0f, 0.0f, 0.0f));
 	}
-	public override void move(float t)
+	public override void move()
 	{
 		
-        if ((transform.position.x > 6f )&&(t<1.0f)) transform.Translate (-0.5f,0,0);
-        else if (t>1.0f) transform.Translate (-0.01f,0,0);
+        if ((transform.position.x > 6f )&&(time<1.0f)) transform.Translate (-0.5f,0,0);
+        else if (time>1.0f) transform.Translate (-0.01f,0,0);
 
 
 	

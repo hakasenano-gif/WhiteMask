@@ -6,13 +6,19 @@ using UnityEngine;
 
 public class mob_balloonSkeletonChild : MonoBehaviour
 {
+    
     public GameObject ObjectParent;
+    public AudioClip se_break;
+    AudioSource audioSource;
+    private SpriteRenderer sprite;
     private Animator animator; 
     private int hp = 3;
     private float breakAnimeTime = 0.3f;
 
     public void Start()
     {       
+        audioSource = GetComponent<AudioSource>();
+        sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
     }
 
@@ -45,7 +51,11 @@ public class mob_balloonSkeletonChild : MonoBehaviour
         this.tag = "broken";
         transform.SetParent(null);
         yield return new WaitForSeconds(breakAnimeTime);
-        animator.SetBool("FinishBreakAnimation",true);
+        sprite.color = new Color (0,0,0,0);
+        audioSource.PlayOneShot(se_break);
+        yield return new WaitForSeconds(2f);
+        
+
         Destroy(gameObject);
     }
 }

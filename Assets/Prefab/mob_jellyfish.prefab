@@ -169,6 +169,8 @@ MonoBehaviour:
   size: 0
   time: 0
   gamemanager: {fileID: 0}
+  enemy_death_effect: {fileID: 3682308043618869974, guid: 68c89704f77b2d347a11773c7e4cd298, type: 3}
   rb: {fileID: 0}
+  se_death: {fileID: 8300000, guid: a24e20c85cdccc841b6f6bacd940ec4f, type: 3}
   jellyfish: {fileID: 0}
   target: {fileID: 0}

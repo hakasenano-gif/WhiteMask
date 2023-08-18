@@ -14,7 +14,7 @@ public class mob_fairy : Enemy
 
 		hp = 3;
 		firerate=2f;
-		size = 0.3f;
+		size = 2.5f;
 		speed = 0.05f;
 		Score = 80;
 	}

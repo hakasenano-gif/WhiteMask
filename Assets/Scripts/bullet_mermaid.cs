@@ -9,7 +9,7 @@ public class bullet_mermaid : bulletEnemyParent
 {
     public override void initialize()
     {
-        radius = 0.3f;
+        radius = 1f;
         speed = 0.1f;
     }
 

@@ -169,7 +169,9 @@ MonoBehaviour:
   size: 0
   time: 0
   gamemanager: {fileID: 0}
+  enemy_death_effect: {fileID: 3682308043618869974, guid: 68c89704f77b2d347a11773c7e4cd298, type: 3}
   rb: {fileID: 0}
+  se_death: {fileID: 8300000, guid: a24e20c85cdccc841b6f6bacd940ec4f, type: 3}
   stopPos: 0
   speed: 0.01
   bullet_mermaid: {fileID: 703901094873545432, guid: c2596aa41e186724997e40e04777d003, type: 3}
