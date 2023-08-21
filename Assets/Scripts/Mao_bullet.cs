@@ -51,9 +51,9 @@ public class Mao_bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // グラウンドタグかプレイヤータグに衝突した場合は弾を削除
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if(collision.gameObject.CompareTag("Player")) collision.gameObject.SendMessage("hit");
+	          collision.gameObject.SendMessage("hit");
             Destroy(gameObject);
         }
     }
