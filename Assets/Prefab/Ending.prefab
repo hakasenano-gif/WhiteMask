@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6691744692538019741}
   - component: {fileID: 8455974231688166159}
   - component: {fileID: 3593040523726409661}
-  - component: {fileID: 8161290626812655406}
+  - component: {fileID: 6489168267343320663}
   m_Layer: 5
   m_Name: Ending
   m_TagString: Untagged
@@ -35,7 +35,7 @@ RectTransform:
   - {fileID: 4598955575090621749}
   - {fileID: 8394664431210720378}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8161290626812655406
+--- !u!114 &6489168267343320663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 171893451434675476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eadad2ad878022a4db728102da011d1c, type: 3}
+  m_Script: {fileID: 11500000, guid: ad3f3989b15044340b92e394ff8ca966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EndingMessage: {fileID: 8563719191839925981}
@@ -146,7 +146,7 @@ RectTransform:
   m_GameObject: {fileID: 1156985063677232539}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1856338298834946782}
@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -300, y: 200}
+  m_AnchoredPosition: {x: -200, y: 175}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3107657661237861024
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<SIZE=18>PRESS ESCAPE \nTO SKIP"
+  m_text: "<SIZE=12>PRESS ESCAPE \nTO SKIP"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce112424ff72d394a97760bcd0263be2, type: 2}
   m_sharedMaterial: {fileID: 1603191121549125708, guid: ce112424ff72d394a97760bcd0263be2, type: 2}
@@ -194,8 +194,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -212,8 +212,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 0
+  m_fontSizeBase: 0
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -297,7 +297,7 @@ RectTransform:
   m_GameObject: {fileID: 8563719191839925981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1856338298834946782}
@@ -305,7 +305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: -600}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7443827585239916197
@@ -336,13 +336,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<align=center><SIZE=50>\u7D20\u6750\u63D0\u4F9B\u8005\u69D8\n\n<SIZE=30>DOT
-    ILLUST\u69D8\n https://dot-illust.net/terms/\n\nDOVA - SYNDROME\u69D8\n https://dova-s.jp/se/play674.html\n\n\u3074\u307D\u3084\u69D8\n
-    https://pipoya.net/\n\nAyu \u30D3\u30C3\u30C8\u30DE\u30C3\u30D7\u30D5\u30A9\u30F3\u30C8\u69D8\n
-    http://x-tt.osdn.jp/ayu.html\n\n\u81EA\u5BB6\u88FD\u30D5\u30A9\u30F3\u30C8\u5DE5\u623F\u69D8\n
-    http://jikasei.me/font/jf-dotfont/\n\n\n<SIZE=50>\u958B\u767A\u8005\n\n<SIZE=30>\u685C\u5EAD
-    \u4F91\u661F\n\n\u5927\u6A4B \u8056\u53F8\n\n\u7AF9\u5185 \u9678\u7FD4\n\n\u677E\u672C
-    \u5929\u4F51\n\n\u95A2\u5CA1 \u7A7A\u5DF1\n\n"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce112424ff72d394a97760bcd0263be2, type: 2}
   m_sharedMaterial: {fileID: 1603191121549125708, guid: ce112424ff72d394a97760bcd0263be2, type: 2}
@@ -352,7 +346,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

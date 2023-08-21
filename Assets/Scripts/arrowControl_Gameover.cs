@@ -25,7 +25,7 @@ public class arrowControl_Gameover : MonoBehaviour
             if(choiceNum == 0) 
             {
                 audioSource.PlayOneShot(se_select);
-                rect.localPosition -= new Vector3(0,30,0);
+                rect.localPosition -= new Vector3(0,70,0);
                 choiceNum=1;
             }
         }
@@ -34,7 +34,7 @@ public class arrowControl_Gameover : MonoBehaviour
             if(choiceNum == 1) 
             {
                 audioSource.PlayOneShot(se_select);
-                rect.localPosition += new Vector3(0,30,0);
+                rect.localPosition += new Vector3(0,70,0);
                 choiceNum=0;
             }
         }
@@ -55,7 +55,7 @@ public class arrowControl_Gameover : MonoBehaviour
     }
     private void OnEnable()
     {      
-      rect.localPosition += new Vector3(0,30*(choiceNum),0);
+      rect.localPosition += new Vector3(0,70*(choiceNum),0);
       choiceNum = 0;  
     }
 }

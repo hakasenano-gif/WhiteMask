@@ -7,6 +7,7 @@ public class Akuma_move : MonoBehaviour
     public int hp;
     private int BossScore = 10000;
     private float bossBattleTime; // ボス戦の経過時間
+    private float bossStartTime;
     public float moveSpeed = 2.0f;               // ボスの移動速度
     public float jumpForce = 5.0f;               // ボスのジャンプ力
     public float minJumpCooldown = 1.0f;         // ジャンプクールダウンの最小時間
@@ -17,21 +18,23 @@ public class Akuma_move : MonoBehaviour
     private bool isMovingRight = true;
 
     private Rigidbody2D rb;
-    private gamemanager gameManager;  // GameManager の参照
+    private GameObject gameManager;  // GameManager の参照
 
     private void Start()
     {
 	// ボス戦の開始時刻を記録
         bossBattleTime = Time.time;
+        
 
-	// GameManager のインスタンスを取得
-        gameManager = FindObjectOfType<gamemanager>();
+	// GameManager のオブジェクトを取得
+        gameManager = GameObject.Find("Gamemanager");
         rb = GetComponent<Rigidbody2D>();
         CalculateNextJumpTime();  // 初期のジャンプ時間を計算
     }
 
     private void Update()
     {
+        bossBattleTime = Time.time - bossStartTime;
         if (Time.time >= nextJumpTime)
         {
             Jump();               // ジャンプ
@@ -78,11 +81,12 @@ public class Akuma_move : MonoBehaviour
 			Destroy(gameObject);
 
 			// ボス戦の戦闘時間に応じてスコア変動
-            		float battleBonus = 100 * (100 - bossBattleTime);
+            float battleBonus = 100 * (100 - bossBattleTime);
+            if(battleBonus <=0 ) battleBonus = 0;
 			int Score = Mathf.FloorToInt(BossScore + battleBonus);
 
-			gameManager.AddScore(Score);
-			gameManager.Boss_Defeated();
+			gameManager.SendMessage("AddScore",Score);
+			gameManager.SendMessage("Boss_Defeated");
 		}
 	}
 
@@ -94,11 +98,12 @@ public class Akuma_move : MonoBehaviour
 			Destroy(gameObject);
 
 			// ボス戦の戦闘時間に応じてスコア変動
-            		float battleBonus = 100 * (100 - bossBattleTime);
+            float battleBonus = 100 * (100 - bossBattleTime);
+            if(battleBonus <=0 ) battleBonus = 0;
 			int Score = Mathf.FloorToInt(BossScore + battleBonus);
 
-			gameManager.AddScore(Score);
-			gameManager.Boss_Defeated();
+			gameManager.SendMessage("AddScore",Score);
+			gameManager.SendMessage("Boss_Defeated");
 		}
 	}
 

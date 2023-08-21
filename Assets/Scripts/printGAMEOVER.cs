@@ -30,7 +30,7 @@ public class printGAMEOVER : MonoBehaviour
             score = Gamemanager.Score;
         }
 
-        printText.text = "<SIZE=45>GAMEOVER\n\n<SIZE=25>SCORE:" + score + "\n\n\n再挑戦する\nタイトルに戻る".ToString();
+        printText.text = "<align=center><SIZE=70>GAMEOVER\n\n<SIZE=30>SCORE:" + score + "\n\n\n再挑戦する\nタイトルに戻る".ToString();
     }
 
 }

@@ -4,14 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Ground
   - slash
   - enemy
   - bullet
-  - enemyBullet
-  - playerBullet
   - broken
-  - Enemy
-  - Ground
+  - gamemanager
   layers:
   - Default
   - TransparentFX
@@ -19,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - UI_1
+  - 
   - 
   - 
   - 

@@ -21,7 +21,7 @@ public class mob_grimReaper : Enemy
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		target = GameObject.Find("Player");
-		hp = 15;
+		hp = 10;
 		firerate = 5f;
 		nextfire = 1.5f;
 		size = 2.1f;

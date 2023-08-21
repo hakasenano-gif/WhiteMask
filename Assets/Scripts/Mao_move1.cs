@@ -7,6 +7,7 @@ public class Mao_move1 : MonoBehaviour
     public int hp;
     private int BossScore = 10000;
     private float bossBattleTime; // ボス戦の経過時間
+    private float bossStartTime;
     public float teleportInterval = 5f; // 瞬間移動の間隔（秒）
 
     private float teleportRangeX = 7.5f; // X方向の瞬間移動範囲
@@ -15,7 +16,7 @@ public class Mao_move1 : MonoBehaviour
 
     private Camera mainCamera;
     private GameObject playerObject; // プレイヤーのGameObject
-    private gamemanager gameManager;  // GameManager の参照
+    private GameObject gameManager;  // GameManager の参照
 
     public GameObject bulletPrefab; // プレハブから設定する弾のPrefab
     public float bulletSpeed = 0.1f; // 弾の移動速度
@@ -28,14 +29,19 @@ public class Mao_move1 : MonoBehaviour
 
 	// ボス戦の開始時刻を記録
         bossBattleTime = Time.time;
+        bossStartTime = Time.time;
 
-	// GameManager のインスタンスを取得
-        gameManager = FindObjectOfType<gamemanager>();
+	// GameManager のオブジェクトを取得
+        gameManager = GameObject.Find("Gamemanager");
 
         // 一定間隔で瞬間移動を開始
         InvokeRepeating("TeleportToRandomLocation", teleportInterval, teleportInterval);
     }
 
+    private void Update()
+    {
+        bossBattleTime = Time.time - bossStartTime;
+    }
     private void StartShooting()
     {
         // 0.5秒ごとに5回射撃するコルーチンを開始
@@ -116,11 +122,12 @@ public class Mao_move1 : MonoBehaviour
 			Destroy(gameObject);
 
 			// ボス戦の戦闘時間に応じてスコア変動
-            		float battleBonus = 100 * (100 - bossBattleTime);
+            float battleBonus = 100 * (100 - bossBattleTime);
+            if(battleBonus <= 0) battleBonus = 0;
 			int Score = Mathf.FloorToInt(BossScore + battleBonus);
 
-			gameManager.AddScore(Score);
-			gameManager.Boss_Defeated();
+			gameManager.SendMessage("AddScore",Score);
+			gameManager.SendMessage("Boss_Defeated");
 		}
 	}
 
@@ -132,11 +139,12 @@ public class Mao_move1 : MonoBehaviour
 			Destroy(gameObject);
 
 			// ボス戦の戦闘時間に応じてスコア変動
-            		float battleBonus = 100 * (100 - bossBattleTime);
+            float battleBonus = 100 * (100 - bossBattleTime);
+            if(battleBonus <=0 ) battleBonus = 0;
 			int Score = Mathf.FloorToInt(BossScore + battleBonus);
 
-			gameManager.AddScore(Score);
-			gameManager.Boss_Defeated();
+			gameManager.SendMessage("AddScore",Score);
+			gameManager.SendMessage("Boss_Defeated");
 		}
 	}
 

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 9028000792556114195}
   - component: {fileID: 5627393878826806357}
   - component: {fileID: 3330519443132290425}
-  - component: {fileID: 1223148682681870520}
   - component: {fileID: 6380051945841091097}
   - component: {fileID: 6864294568542158756}
   m_Layer: 0
@@ -36,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7019750924535882818
 SpriteRenderer:
@@ -186,18 +185,6 @@ MonoBehaviour:
   jump_force: 100
   Is_grounded: 0
   Is_jumping: 0
---- !u!114 &1223148682681870520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6549074419100297469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d659eb661b7522b4ba0ae62bd5b0d051, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &6380051945841091097
 AudioSource:
   m_ObjectHideFlags: 0

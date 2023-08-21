@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f3a46b51f3d243b0f1e80128f812f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scale: 3
+  Scale: 0.2
   Interval: 1
   Images:
-  - {fileID: 21300000, guid: 2019fffba89240d42904450f3f43e808, type: 3}
+  - {fileID: 21300000, guid: e0f926216cfb66d4faa62a43ec87fdc3, type: 3}

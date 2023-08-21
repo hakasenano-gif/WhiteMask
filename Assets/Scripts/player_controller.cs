@@ -1,9 +1,3 @@
-/*編集履歴
-ライフをゲームマネージャーで管理するように
-ダメージを受けた後の一定時間の無敵時間を追加
-→無敵時間の長さはinvincibilityTime_maxで管理
-
-*/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -53,7 +47,6 @@ public class player_controller : MonoBehaviour
     [SerializeField]private int jump_now = 0;
     [SerializeField]private float jump_force = 100f; 
 	[SerializeField]private bool Is_grounded = false;
-    [SerializeField]private bool Is_jumping = false;
 
 	
 
@@ -69,7 +62,7 @@ public class player_controller : MonoBehaviour
 
         rb=GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Static;
-        rb.gravityScale = 30;
+        rb.gravityScale = 20;
         
         CircleCollider2D collider = GetComponent<CircleCollider2D> ();
         collider.radius = radius;
@@ -155,15 +148,16 @@ public class player_controller : MonoBehaviour
     void player_shoot()
     {
         
-        if (Input.GetKey (KeyCode.Space)&&nextfire<=0f) {
-             audioSource.PlayOneShot(se_shoot);
-			Instantiate (bulletPlayerPrefab, transform.position, Quaternion.identity);
-			nextfire=fireRate;
-		}
-		if(nextfire>=0f){
+        if ((Input.GetKey (KeyCode.Space)||(Input.GetKey(KeyCode.Z)))&&(nextfire<=0f))
+        {
+            audioSource.PlayOneShot(se_shoot);
+		    Instantiate (bulletPlayerPrefab, transform.position, Quaternion.identity);
+		    nextfire=fireRate;
+	    }
+		if(nextfire>=0f)
+        {
 			nextfire-=Time.deltaTime;
-	        }
-        
+	    }
     }
 
     void player_slash()
@@ -214,7 +208,6 @@ public class player_controller : MonoBehaviour
         
         }
         if ((Is_grounded==true)&&!(Input.GetKey(KeyCode.UpArrow))) jump_now=0;
-        else Is_jumping=false;
     }
 
     IEnumerator flash()
