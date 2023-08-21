@@ -8,8 +8,7 @@ public class EndingMessage : MonoBehaviour
 {
     private float speed = 3f;
     private float transparent = 1;
-    [SerializeField]private float time_to_finish = 60;
-    private bool Is_skipped = false;
+    [SerializeField]private float finishHeight = 3000f;
     private bool Finished_stuffedRoll = false;
     public TextMeshProUGUI printStaff;
     RectTransform rect;
@@ -51,19 +50,13 @@ public class EndingMessage : MonoBehaviour
         if (Input.GetKey (KeyCode.Escape)) 
         {
             speed = 60f;
-            Is_skipped = true;
         }
     }
     void FixedUpdate()
     {
-        if(Finished_stuffedRoll ==false)
+        if(Finished_stuffedRoll ==false && transform.localPosition.y <= finishHeight)
         {
-        transform.Translate (0,speed, 0);
-        }
-        if(time_to_finish >=0) 
-        {
-            if(Is_skipped == false) time_to_finish -=Time.deltaTime;
-            else time_to_finish -= 20*Time.deltaTime; /*50/speed*/
+            transform.Translate (0,speed, 0);
         }
         else if(Finished_stuffedRoll == false)
             {
