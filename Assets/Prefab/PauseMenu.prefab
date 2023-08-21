@@ -145,7 +145,7 @@ RectTransform:
   m_GameObject: {fileID: 3054285320598543555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4479144775331655410}
@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -255, y: -45}
+  m_AnchoredPosition: {x: -180, y: -10}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1812064276040837240
@@ -333,7 +333,7 @@ RectTransform:
   m_GameObject: {fileID: 5262523318771374293}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8674146699687689699}
@@ -419,7 +419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 100}
+  m_AnchoredPosition: {x: -50, y: 80}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5198941131216657578
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "          <b><SIZE=70><align=\"center\">PAUSED\\n</b><line-height=75%>\n<SIZE=36><align=\"left\">\u7D9A\u3051\u308B\n\u4E00\u9762\u304B\u3089\u3084\u308A\u76F4\u3059\n\u30BF\u30A4\u30C8\u30EB\u753B\u9762\u306B\u623B\u308B"
+  m_text: "<b><SIZE=50><align=\"center\">    PAUSED\\n</b><line-height=75%>\n<SIZE=36><align=\"left\">\u7D9A\u3051\u308B\n\u4E00\u9762\u304B\u3089\u3084\u308A\u76F4\u3059\n\u30BF\u30A4\u30C8\u30EB\u753B\u9762\u306B\u623B\u308B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce112424ff72d394a97760bcd0263be2, type: 2}
   m_sharedMaterial: {fileID: 1603191121549125708, guid: ce112424ff72d394a97760bcd0263be2, type: 2}

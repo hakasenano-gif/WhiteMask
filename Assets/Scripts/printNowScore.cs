@@ -23,7 +23,7 @@ public class printNowScore : MonoBehaviour
         if(Gamemanager != null)
         {
             score = Gamemanager.Score;
-            printText.text = "<SIZE=30>SCORE:" + score.ToString();
+            printText.text = "<SIZE=15>SCORE:" + score.ToString();
         }
     }
 

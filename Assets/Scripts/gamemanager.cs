@@ -1,8 +1,3 @@
-/*
-編集履歴
-
-*/
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +25,8 @@ public class gamemanager : MonoBehaviour
 	public GameObject SwordGauge;
 	public GameObject PrintSwordGauge;
 	public GameObject PrintLimitTime;
-	public GameObject Ending;
+	public GameObject Ending_ins;
+	public GameObject Ending_fold;
 	public GameObject PrintGameResult;
 	public static gamemanager instance;	
 	public int Score = 0;
@@ -61,6 +57,9 @@ public class gamemanager : MonoBehaviour
 		bgm.Play();
 		PauseMenu.SetActive(true);
 		GameoverPrint.SetActive(true);
+		PrintNowScore.SetActive(false);
+	    SwordGauge.SetActive(false);
+	    PrintLimitTime.SetActive(false);
 		PauseMenu.SetActive(false);
 		GameoverPrint.SetActive(false);
 
@@ -99,10 +98,7 @@ Update関数内のものはこの値に関わらず動く．*/
 /*ボスシーン*/
 	void BossStageProcess()
 	{
-		/*
-		SceneManager.LoadScene("MainScene2");
-		boss_appeared = false;
-		*/
+
 	}
 
 	void gamePause()
@@ -169,6 +165,7 @@ Update関数内のものはこの値に関わらず動く．*/
 		
 		stage_time = stage_time_max;
 		boss_appeared = true;
+		PrintLimitTime.SetActive(false);
 		if(SceneManager.GetActiveScene().name == "MainScene1")
 		{
         	SceneManager.LoadScene("BossScene1");
@@ -189,6 +186,7 @@ Update関数内のものはこの値に関わらず動く．*/
 	public void Boss_Defeated()
 	{
 		/*ボスを倒した際にこの関数を呼び出す*/
+		PrintLimitTime.SetActive(true);
 		boss_appeared = false;
 		if(SceneManager.GetActiveScene().name == "BossScene1")
 		{
@@ -197,16 +195,17 @@ Update関数内のものはこの値に関わらず動く．*/
 
 		if(SceneManager.GetActiveScene().name == "BossScene2")
 		{
-			SceneManager.LoadScene("MainScene2");			
+			SceneManager.LoadScene("MainScene3");			
 		}
 
 		if(SceneManager.GetActiveScene().name == "BossScene3")
 		{
 			SceneManager.LoadScene("EndingScene");
 			canPauseGame = false;
-			Instantiate (Ending, new Vector3(0,0,0) , Quaternion.identity);
-			Ending = GameObject.Find("Ending");
 			StartCoroutine("stuffedRoll");
+			SwordGauge.SetActive(false);
+			PrintLimitTime.SetActive(false);
+			PrintNowScore.SetActive(false);
 		}
 		StartCoroutine("SceneLoad");
 	}
@@ -247,7 +246,7 @@ Update関数内のものはこの値に関わらず動く．*/
 				bgm.clip = bgm_boss3;
 				break;
 			}
-			case "TitleScene":
+			case "Opening":
 			{
 				bgm.clip = bgm_title;
 				break;
@@ -265,7 +264,9 @@ Update関数内のものはこの値に関わらず動く．*/
 	IEnumerator stuffedRoll()
 	{
 		yield return null;
-		while(Ending != null)
+		Ending_fold = GameObject.Find("Ending");
+		yield return null;
+		while(Ending_fold != null)
 		{
 			yield return null;
 		}
@@ -288,7 +289,7 @@ Update関数内のものはこの値に関わらず動く．*/
 		PauseMenu.SetActive(false);
 		GameoverPrint.SetActive(false);
 		yield return null;
-		SceneManager.LoadScene("MainScene1");
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		StartCoroutine("Initialize");
 		canPauseGame = true;
 		StartCoroutine("SceneLoad");
@@ -301,25 +302,33 @@ Update関数内のものはこの値に関わらず動く．*/
 		PrintLimitTime.SetActive(false);
 		PauseMenu.SetActive(false);
 		GameoverPrint.SetActive(false);
-		yield return null;
-		SceneManager.LoadScene("TitleScene");
-		StartCoroutine("Initialize");
 		canPauseGame = false;
-		StartCoroutine("SceneLoad");
-	}
-
-	public void TitleToGame()
-	{
-		Is_Title = false;
-		PrintNowScore.SetActive(true);
-		SwordGauge.SetActive(true);
-		PrintLimitTime.SetActive(true);
-		SceneManager.LoadScene("MainScene1");
+		yield return null;
+		SceneManager.LoadScene("Opening");
 		StartCoroutine("Initialize");
-		canPauseGame = true;
 		StartCoroutine("SceneLoad");
 	}
 
+	public void TitleToGame(string SceneName)
+	{
+		if (SceneName == "Main") SceneManager.LoadScene(SceneName);
+		else
+		{
+			Is_Title = false;
+			PrintNowScore.SetActive(true);
+			SwordGauge.SetActive(true);
+
+			if (SceneName == "BossScene1" || SceneName == "BossScene2" || SceneName == "BossScene3") PrintLimitTime.SetActive(false);
+			else  PrintLimitTime.SetActive(true);
+
+			if(SceneName != null) SceneManager.LoadScene(SceneName);
+			else SceneManager.LoadScene("MainScene1");
+			
+			StartCoroutine("Initialize");
+			canPauseGame = true;
+			StartCoroutine("SceneLoad");
+		}
+	}
 	public void ExitGame()
 	{
 		#if UNITY_EDITOR

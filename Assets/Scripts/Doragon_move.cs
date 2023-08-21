@@ -7,6 +7,7 @@ public class Doragon_move : MonoBehaviour
     public int hp;
     private int BossScore = 10000;
     private float bossBattleTime; // ボス戦の経過時間
+    private float bossStartTime;
     public float moveSpeed = 5f;
     public float attackInterval = 2f;
     public float attackDuration = 1f; // 攻撃の持続時間
@@ -17,15 +18,16 @@ public class Doragon_move : MonoBehaviour
     private float timeSinceLastAttack = 0f;
     private bool isAttacking = false;
     private GameObject playerObject;
-    private gamemanager gameManager;  // GameManager の参照
+    private GameObject gameManager;
 
     void Start()
     {
-	// GameManager のインスタンスを取得
-        gameManager = FindObjectOfType<gamemanager>();
+	// GameManager のオブジェクトを取得
+       gameManager = GameObject.Find("Gamemanager");
 
 	// ボス戦の開始時刻を記録
         bossBattleTime = Time.time;
+        bossStartTime = Time.time;
 
         // 初期位置をランダムに設定
         SetRandomTargetPosition();
@@ -34,6 +36,11 @@ public class Doragon_move : MonoBehaviour
         playerObject = GameObject.FindGameObjectWithTag("Player");
     }
 
+    void Update()
+    {
+    bossBattleTime = Time.time - bossStartTime;
+    }
+    
     void FixedUpdate()
     {
         if (!isAttacking)
@@ -86,9 +93,12 @@ public class Doragon_move : MonoBehaviour
     void Attack()
     {
         // プレーヤーオブジェクトの位置に向かって攻撃を行う
-        Vector3 directionToPlayer = (playerObject.transform.position - transform.position).normalized;
-        GameObject Dragon_bullet = Instantiate(Dragon_bulletPrefab, transform.position, Quaternion.identity);
-        Dragon_bullet.GetComponent<Rigidbody2D>().velocity = directionToPlayer * 10f; // 攻撃速度を設定（仮に10fとします）
+        if(playerObject != null)
+        {
+            Vector3 directionToPlayer = (playerObject.transform.position - transform.position).normalized;
+            GameObject Dragon_bullet = Instantiate(Dragon_bulletPrefab, transform.position, Quaternion.identity);
+            Dragon_bullet.GetComponent<Rigidbody2D>().velocity = directionToPlayer * 10f; // 攻撃速度を設定（仮に10fとします）
+        }
     }
 
     void StopAttack()
@@ -104,11 +114,12 @@ public class Doragon_move : MonoBehaviour
 			Destroy(gameObject);
 
 			// ボス戦の戦闘時間に応じてスコア変動
-            		float battleBonus = 100 * (100 - bossBattleTime);
+            float battleBonus = 100 * (100 - bossBattleTime);
+            if(battleBonus <=0 ) battleBonus = 0;
 			int Score = Mathf.FloorToInt(BossScore + battleBonus);
 
-			gameManager.AddScore(Score);
-			gameManager.Boss_Defeated();
+			gameManager.SendMessage("AddScore",Score);
+			gameManager.SendMessage("Boss_Defeated");
 		}
 	}
 
@@ -120,11 +131,12 @@ public class Doragon_move : MonoBehaviour
 			Destroy(gameObject);
 
 			// ボス戦の戦闘時間に応じてスコア変動
-            		float battleBonus = 100 * (100 - bossBattleTime);
+            float battleBonus = 100 * (100 - bossBattleTime);
+            if(battleBonus <=0 ) battleBonus = 0;
 			int Score = Mathf.FloorToInt(BossScore + battleBonus);
 
-			gameManager.AddScore(Score);
-			gameManager.Boss_Defeated();
+			gameManager.SendMessage("AddScore",Score);
+			gameManager.SendMessage("Boss_Defeated");
 		}
 	}
 

@@ -25,13 +25,13 @@ public class arrowControl : MonoBehaviour
             if(choiceNum == 1)
             {
                 audioSource.PlayOneShot(se_select);
-                rect.localPosition -= new Vector3(0,55,0);
+                rect.localPosition -= new Vector3(0,40,0);
                 choiceNum=2;                
             }
             if(choiceNum == 0) 
             {
                 audioSource.PlayOneShot(se_select);
-                rect.localPosition -= new Vector3(0,55,0);
+                rect.localPosition -= new Vector3(0,40,0);
                 choiceNum=1;
             }
         }
@@ -40,13 +40,13 @@ public class arrowControl : MonoBehaviour
             if(choiceNum == 1) 
             {
                 audioSource.PlayOneShot(se_select);
-                rect.localPosition += new Vector3(0,55,0);
+                rect.localPosition += new Vector3(0,40,0);
                 choiceNum=0;
             }
             if(choiceNum == 2)
             {
                 audioSource.PlayOneShot(se_select);
-                rect.localPosition += new Vector3(0,55,0);
+                rect.localPosition += new Vector3(0,40,0);
                 choiceNum=1;                
             }
         }
@@ -71,7 +71,7 @@ public class arrowControl : MonoBehaviour
     }
     private void OnEnable()
     {      
-      rect.localPosition += new Vector3(0,55*(choiceNum),0);
+      rect.localPosition += new Vector3(0,40*(choiceNum),0);
       choiceNum = 0;  
     }
 }
