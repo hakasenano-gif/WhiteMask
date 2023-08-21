@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{42370EC6-82A8-4207-015B-F9D7D29FB464}</ProjectGuid>
+    <ProjectGuid>{6310B98F-D632-F4AE-40CF-325B0C787DE7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -108,7 +108,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples _ Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Scripts\bulletMob01.cs" />
     <Compile Include="Assets\Scripts\Change_Scene.cs" />
-    <Compile Include="Assets\Scripts\Mao_move.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples _ Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Scripts\bullet_skeleton.cs" />
     <Compile Include="Assets\Scripts\PressStart.cs" />
@@ -117,7 +116,6 @@
     <Compile Include="Assets\Scripts\bullet_poisonSlime.cs" />
     <Compile Include="Assets\Scripts\Singleton_PrintLimitTime.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples _ Extras\Scripts\ChatController.cs" />
-    <Compile Include="Assets\Scripts\LifeGage.cs" />
     <Compile Include="Assets\Scripts\bullet_ghost.cs" />
     <Compile Include="Assets\Scripts\Doragon_move.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples _ Extras\Scripts\SimpleScript.cs" />
