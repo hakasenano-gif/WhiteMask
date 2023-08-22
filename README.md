@@ -2,6 +2,7 @@
 2023年度実践プログラミング第2班 ホワイトマスク によるゲーム制作
 
 ## 再配布が禁止のため，ユーザがダウンロードする必要のあるファイル．
+### 画像ファイルの場合，プロジェクトの仕様に合わせて加工が必要となる場合があるので，注意してください．
 ### Images
 - From https://www.ac-illust.com/main/detail.php?id=24041321 to Assets/Images/24041321.jpg
 - From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/gauge_heart_max.png to Assets/Image/gauge_heart_max.png
@@ -19,9 +20,6 @@
 - From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/kaseijin_green.png to Assets/Images/kaseijin_green.png
 - From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/kogeki_cut_02.png to Assets/Images/kogeki_cut_02.png
 - From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/yurei_03.png to Assets/Images/yurei_03.png
-- 
-- 
-
 
 ### Sounds
 - From https://www.music-note.jp/bgm/mp3/20130207/peacefultown.mp3 to Assets/Sounds/peacefultown.mp3
@@ -42,5 +40,3 @@
 - From https://maou.audio/sound/game/maou_game_battle36.mp3 to Assets/Sounds/maou_game_battle36.mp3
 - From https://dova-s.jp/se/play674.html (Track1) to Assets/Images/ショット音.mp3
 
-### TextMesh Pro
-- ??? (We will update soon.)
