@@ -5,6 +5,23 @@
 ### Images
 - From https://www.ac-illust.com/main/detail.php?id=24041321 to Assets/Images/24041321.jpg
 - From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/gauge_heart_max.png to Assets/Image/gauge_heart_max.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/bakuhatsu_01.png to Assets/Images/bakuhatsu_01.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/character_monster_devil_purple.png to Assets/Images/character_monster_devil_purple.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/character_monster_devil_red.png to Assets/Images/character_monster_devil_purple.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/character_monster_dragon_01_red.png/ to Assets/Images/character_monster_dragon_01_red.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/character_monster_mao_01.png to Assets/Images/character_monster_mao_01.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/character_monster_mao_03.png to Assets/Images/character_monster_mao_03.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/character_monster_skeleton_01.png to Assets/Images/character_monster_skeleton_01.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/img/ttl_png.png to Assets/Images/character_monster_slime_green.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/character_monster_slime_purple.png/ to Assets/Images/character_monster_slime_purple.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/character_ningyo_01_blue_pink.png to Assets/Images/character_ningyo_02_blue_pink.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/img/ttl_png.png to Assets/Images/character_yosei_01_green.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/kaseijin_green.png to Assets/Images/kaseijin_green.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/kogeki_cut_02.png to Assets/Images/kogeki_cut_02.png
+- From https://dot-illust.net/wp-content/themes/dotillust/assets/dl/yurei_03.png to Assets/Images/yurei_03.png
+- 
+- 
+
 
 ### Sounds
 - From https://www.music-note.jp/bgm/mp3/20130207/peacefultown.mp3 to Assets/Sounds/peacefultown.mp3
